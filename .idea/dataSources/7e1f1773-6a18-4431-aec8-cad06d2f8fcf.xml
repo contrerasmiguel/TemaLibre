@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="TemaLibre (Aplicación)">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="temalibre">
+      <visible>1</visible>
+    </schema>
+    <table id="2" parent="1" name="administradores"/>
+    <table id="3" parent="1" name="bloqueos"/>
+    <table id="4" parent="1" name="comentarios"/>
+    <table id="5" parent="1" name="comentarios_eliminados"/>
+    <table id="6" parent="1" name="expiracion_suspensiones"/>
+    <table id="7" parent="1" name="solicitudes_usuarios"/>
+    <table id="8" parent="1" name="suspensiones"/>
+    <table id="9" parent="1" name="temas"/>
+    <table id="10" parent="1" name="temas_eliminados"/>
+    <table id="11" parent="1" name="temas_seguidos"/>
+    <table id="12" parent="1" name="usuarios"/>
+    <key id="13" parent="2" name="PRIMARY">
+      <columns>id_administrador</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="14" parent="2" name="administradores_ibfk_1">
+      <columns>id_administrador</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="15" parent="3" name="id_usuario_bloqueado">
+      <columns>id_usuario_bloqueado
+id_usuario_que_bloquea</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="16" parent="3" name="id_usuario_que_bloquea">
+      <columns>id_usuario_que_bloquea</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="17" parent="3" name="id_usuario_bloqueado">
+      <columns>id_usuario_bloqueado
+id_usuario_que_bloquea</columns>
+      <underlying-index>id_usuario_bloqueado</underlying-index>
+    </key>
+    <key id="18" parent="3" name="PRIMARY">
+      <columns>id_bloqueo</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="19" parent="3" name="bloqueos_ibfk_1">
+      <columns>id_usuario_bloqueado</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="20" parent="3" name="bloqueos_ibfk_2">
+      <columns>id_usuario_que_bloquea</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="21" parent="4" name="id_tema_comentado">
+      <columns>id_tema_comentado</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="22" parent="4" name="id_usuario_creador">
+      <columns>id_usuario_creador</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="23" parent="4" name="PRIMARY">
+      <columns>id_comentario</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="24" parent="4" name="comentarios_ibfk_1">
+      <columns>id_tema_comentado</columns>
+      <ref-key>~.temas.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="25" parent="4" name="comentarios_ibfk_2">
+      <columns>id_usuario_creador</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="26" parent="5" name="id_usuario_que_elimina">
+      <columns>id_usuario_que_elimina</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="27" parent="5" name="PRIMARY">
+      <columns>id_comentario_eliminado</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="28" parent="5" name="comentarios_eliminados_ibfk_1">
+      <columns>id_comentario_eliminado</columns>
+      <ref-key>~.comentarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="29" parent="5" name="comentarios_eliminados_ibfk_2">
+      <columns>id_usuario_que_elimina</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="30" parent="6" name="id_suspension">
+      <columns>id_suspension</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="31" parent="6" name="PRIMARY">
+      <columns>id_expiracion</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="32" parent="6" name="expiracion_suspensiones_ibfk_1">
+      <columns>id_suspension</columns>
+      <ref-key>~.suspensiones.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="33" parent="7" name="id_usuario_solicitante">
+      <columns>id_usuario_solicitante</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="34" parent="7" name="PRIMARY">
+      <columns>id_solicitud</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="35" parent="7" name="solicitudes_usuarios_ibfk_1">
+      <columns>id_usuario_solicitante</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="36" parent="8" name="id_administrador_que_suspende">
+      <columns>id_administrador_que_suspende</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="37" parent="8" name="id_usuario_suspendido">
+      <columns>id_usuario_suspendido</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="38" parent="8" name="PRIMARY">
+      <columns>id_suspension</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="39" parent="8" name="suspensiones_ibfk_1">
+      <columns>id_usuario_suspendido</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="40" parent="8" name="suspensiones_ibfk_2">
+      <columns>id_administrador_que_suspende</columns>
+      <ref-key>~.administradores.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="41" parent="9" name="id_usuario_creador">
+      <columns>id_usuario_creador
+titulo</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="42" parent="9" name="id_usuario_creador">
+      <columns>id_usuario_creador
+titulo</columns>
+      <underlying-index>id_usuario_creador</underlying-index>
+    </key>
+    <key id="43" parent="9" name="PRIMARY">
+      <columns>id_tema</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="44" parent="9" name="temas_ibfk_1">
+      <columns>id_usuario_creador</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="45" parent="10" name="id_usuario_que_elimina">
+      <columns>id_usuario_que_elimina</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="46" parent="10" name="PRIMARY">
+      <columns>id_tema_eliminado</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="47" parent="10" name="temas_eliminados_ibfk_1">
+      <columns>id_tema_eliminado</columns>
+      <ref-key>~.temas.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="48" parent="10" name="temas_eliminados_ibfk_2">
+      <columns>id_usuario_que_elimina</columns>
+      <ref-key>~.usuarios.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="49" parent="11" name="id_tema_seguido">
+      <columns>id_tema_seguido</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="50" parent="11" name="PRIMARY">
+      <columns>id_seguimiento</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="51" parent="11" name="temas_seguidos_ibfk_1">
+      <columns>id_tema_seguido</columns>
+      <ref-key>~.temas.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <index id="52" parent="12" name="correo_electronico">
+      <columns>correo_electronico</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="53" parent="12" name="nombre_usuario">
+      <columns>nombre_usuario</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="54" parent="12" name="correo_electronico">
+      <columns>correo_electronico</columns>
+      <underlying-index>correo_electronico</underlying-index>
+    </key>
+    <key id="55" parent="12" name="nombre_usuario">
+      <columns>nombre_usuario</columns>
+      <underlying-index>nombre_usuario</underlying-index>
+    </key>
+    <key id="56" parent="12" name="PRIMARY">
+      <columns>id_usuario</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
